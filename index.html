@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VS Code Style Interface</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+</head>
+<body>
+  <div class="vscode-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2 class="main-title">EXPLORER</h2>
+
+      <!-- DAA Folder -->
+      <div class="folder" onclick="toggleFolder('daa')">📁 DAA</div>
+      <ul class="subfolders" id="daa">
+        <li onclick="openAssignment('DAA - Assignment 1', 'DAA/Daa1.txt')">📄 Assignment 1</li>
+        <li onclick="openAssignment('DAA - Assignment 2', 'DAA/Daa2.txt')">📄 Assignment 2</li>
+        <li onclick="openAssignment('DAA - Assignment 3', 'DAA/Daa3.txt')">📄 Assignment 3</li>
+      </ul>
+
+      <!-- ML Folder -->
+      <div class="folder" onclick="toggleFolder('ml')">📁 ML</div>
+      <ul class="subfolders" id="ml">
+        <li>
+          <span onclick="openAssignment('ML - Assignment 1', 'ML/01_uber.ipynb')">📄 Assignment 1</span>
+          <button class="download-btn" onclick="downloadFile('ML/01_uber.csv', 'uber.csv')">⬇ Download CSV</button>
+        </li>
+        <li>
+          <span onclick="openAssignment('ML - Assignment 2', 'ML/02_email_spam.ipynb')">📄 Assignment 2</span>
+          <button class="download-btn" onclick="downloadFile('ML/02_emails.csv', 'emails.csv')">⬇ Download CSV</button>
+        </li>
+        <li>
+          <span onclick="openAssignment('ML - Assignment 3', 'ML/03_Bank_Churn.ipynb')">📄 Assignment 3</span>
+          <button class="download-btn" onclick="downloadFile('ML/03_Churn_Modelling.csv', 'Bank_Churn.csv')">⬇ Download CSV</button>
+        </li>
+        <li>
+          <span onclick="openAssignment('ML - Assignment 4', 'ML/04_diabetes.ipynb')">📄 Assignment 4</span>
+          <button class="download-btn" onclick="downloadFile('ML/04_diabetes.csv', 'diabetes.csv')">⬇ Download CSV</button>
+        </li>
+        <li>
+          <span onclick="openAssignment('ML - Assignment 5', 'ML/05_sales_kmeans.ipynb')">📄 Assignment 5</span>
+          <button class="download-btn" onclick="downloadFile('ML/05_sales_data_sample.csv', 'sales_kmeans.csv')">⬇ Download CSV</button>
+        </li>
+      </ul>
+
+      <!-- BT Folder -->
+      <div class="folder" onclick="toggleFolder('bt')">📁 BT</div>
+      <ul class="subfolders" id="bt">
+        <li onclick="openAssignment('BT - Assignment 1', 'BT/Bt1.txt')">📄 Assignment 1</li>
+        <li onclick="openAssignment('BT - Assignment 2', 'BT/Bt2.txt')">📄 Assignment 2</li>
+      </ul>
+    </div>
+
+    <!-- Editor -->
+    <div class="editor">
+      <div class="tab-bar" id="tabBar"></div>
+      <div class="code-area" id="codeArea">
+        <p>Select an assignment to open its content.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

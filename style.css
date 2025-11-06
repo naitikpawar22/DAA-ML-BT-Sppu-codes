@@ -1,0 +1,176 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Consolas", monospace;
+}
+
+body {
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  display: flex;
+  height: 100vh;
+}
+
+.vscode-container {
+  display: flex;
+  width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background-color: #252526;
+  padding: 10px;
+  border-right: 1px solid #333;
+  overflow-y: auto;
+}
+
+.main-title {
+  font-size: 14px;
+  color: #858585;
+  margin-bottom: 10px;
+  padding-left: 5px;
+}
+
+.folder {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 8px;
+  background: #2d2d2d;
+  border-radius: 4px;
+  margin-top: 5px;
+  transition: background 0.2s;
+}
+
+.folder:hover {
+  background: #3a3a3a;
+}
+
+.subfolders {
+  list-style: none;
+  margin-top: 5px;
+  margin-left: 20px;
+  display: none;
+}
+
+.subfolders li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.subfolders li:hover {
+  background: #3a3a3a;
+}
+
+.subfolders li span {
+  flex: 1;
+  cursor: pointer;
+}
+
+.download-btn {
+  background: #007acc;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.download-btn:hover {
+  background: #005a9e;
+}
+
+/* Editor Area */
+.editor {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-bar {
+  height: 40px;
+  background: #2d2d2d;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  border-bottom: 1px solid #333;
+  overflow-x: auto;
+}
+
+.tab {
+  margin-right: 10px;
+  padding: 8px 12px;
+  background: #3c3c3c;
+  border-radius: 5px 5px 0 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tab.active {
+  background: #1e1e1e;
+  color: #fff;
+}
+
+.code-area {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: #1e1e1e;
+  position: relative;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #007acc;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.copy-btn:hover {
+  background: #005a9e;
+}
+
+.notebook-view {
+  padding: 10px;
+}
+
+.markdown-cell {
+  background: #2d2d2d;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.code-cell {
+  background: #1e1e1e;
+  border-left: 4px solid #007acc;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.markdown-cell h1, .markdown-cell h2, .markdown-cell h3 {
+  color: #4fc1ff;
+}
+
+.markdown-cell b {
+  color: #ffd700;
+}
+
+.markdown-cell i {
+  color: #ffb6c1;
+}
