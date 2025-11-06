@@ -1,0 +1,41 @@
+Problem Statement:- Write a program non-recursive and recursive program to calculate Fibonacci numbers and
+analyze their time and space complexity.
+
+
+
+# Recursive Fibonacci Function
+
+def fib_recursive(n):
+    if n <= 1:
+        return n
+    else:
+        return fib_recursive(n - 1) + fib_recursive(n - 2)
+
+
+# Example usage
+n = int(input("Enter the number of terms: "))
+print("Fibonacci Series (Recursive):")
+for i in range(n):
+    print(fib_recursive(i), end=" ")
+
+
+
+# Non-Recursive Fibonacci Function
+def fib_iterative(n):
+    a, b = 0, 1
+    if n <= 0:
+        return []
+    elif n == 1:
+        return [0]
+    fib_series = [0, 1]
+    for i in range(2, n):
+        c = a + b
+        fib_series.append(c)
+        a, b = b, c
+    return fib_series
+
+
+# Example usage
+n = int(input("Enter the number of terms: "))
+print("Fibonacci Series (Non-Recursive):")
+print(*fib_iterative(n))

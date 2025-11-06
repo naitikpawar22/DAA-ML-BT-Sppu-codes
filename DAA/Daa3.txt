@@ -1,0 +1,38 @@
+Problem Statement:_ Write a program to solve a fractional Knapsack problem using a greedy method.
+
+# Fractional Knapsack Problem using Greedy Method
+
+def fractional_knapsack(value, weight, capacity):
+    n = len(value)
+    
+    # Calculate value-to-weight ratio
+    ratio = [(value[i] / weight[i], value[i], weight[i]) for i in range(n)]
+    
+    # Sort items by ratio in descending order
+    ratio.sort(reverse=True)
+    
+    total_value = 0.0  # Total profit
+    for r, v, w in ratio:
+        if capacity == 0:
+            break
+        # If the item can be fully added
+        if w <= capacity:
+            total_value += v
+            capacity -= w
+        else:
+            # Take fraction of the item
+            fraction = capacity / w
+            total_value += v * fraction
+            capacity = 0
+    
+    return total_value
+
+
+# Example Input
+value = [60, 100, 120]
+weight = [10, 20, 30]
+capacity = 50
+
+# Function Call
+max_value = fractional_knapsack(value, weight, capacity)
+print(f"Maximum value that can be obtained = {max_value}")

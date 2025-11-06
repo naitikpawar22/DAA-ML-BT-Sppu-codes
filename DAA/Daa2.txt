@@ -1,0 +1,81 @@
+Problem Statement:-Write a program to implement Huffman Encoding using a greedy strategy.
+
+import heapq
+
+# Node class for the Huffman tree
+class Node:
+    def __init__(self, char, freq):
+        self.char = char
+        self.freq = freq
+        self.left = None
+        self.right = None
+
+    # Define comparator for priority queue (based on frequency)
+    def __lt__(self, other):
+        return self.freq < other.freq
+
+
+# Function to build Huffman Tree
+def build_huffman_tree(char_freq):
+    heap = [Node(char, freq) for char, freq in char_freq.items()]
+    heapq.heapify(heap)  # Create a min-heap based on frequencies
+
+    while len(heap) > 1:
+        # Extract two smallest nodes
+        left = heapq.heappop(heap)
+        right = heapq.heappop(heap)
+
+        # Create a new internal node with combined frequency
+        merged = Node(None, left.freq + right.freq)
+        merged.left = left
+        merged.right = right
+
+        # Add the new node back to the heap
+        heapq.heappush(heap, merged)
+
+    # The remaining node is the root
+    return heap[0]
+
+
+# Function to generate Huffman Codes
+def generate_codes(node, current_code, codes):
+    if node is None:
+        return
+    if node.char is not None:
+        codes[node.char] = current_code
+        return
+    generate_codes(node.left, current_code + "0", codes)
+    generate_codes(node.right, current_code + "1", codes)
+
+
+# Main Huffman Encoding function
+def huffman_encoding(data):
+    # Step 1: Calculate frequency of each character
+    char_freq = {}
+    for char in data:
+        char_freq[char] = char_freq.get(char, 0) + 1
+
+    # Step 2: Build Huffman Tree
+    root = build_huffman_tree(char_freq)
+
+    # Step 3: Generate Huffman Codes
+    codes = {}
+    generate_codes(root, "", codes)
+
+    # Step 4: Encode the data
+    encoded_data = "".join([codes[char] for char in data])
+
+    return codes, encoded_data
+
+
+# Example usage
+if __name__ == "__main__":
+    text = input("Enter the text to encode: ")
+    codes, encoded_data = huffman_encoding(text)
+
+    print("\nCharacter Huffman Codes:")
+    for char, code in codes.items():
+        print(f"{char}: {code}")
+
+    print("\nEncoded Data:")
+    print(encoded_data)

@@ -1,0 +1,101 @@
+problem Statement:- Design n-Queens matrix having first Queen placed. Use backtracking to place remaining
+Queens to generate the final n-queen’s matrix.
+
+
+def solve_n_queens_with_first(n, first_row, first_col, one_indexed=True):
+    """
+    Solve N-Queens with the first queen already placed.
+    Parameters:
+      n           : int, board size
+      first_row   : int, row index of the first queen (1-indexed if one_indexed True)
+      first_col   : int, col index of the first queen
+      one_indexed : bool, whether the given (first_row,first_col) are 1-indexed
+    Returns:
+      board (list of strings) with 'Q' and '.' if solution found, else None
+    """
+    # convert to 0-indexed
+    if one_indexed:
+        r0 = first_row - 1
+        c0 = first_col - 1
+    else:
+        r0 = first_row
+        c0 = first_col
+
+    # basic validation
+    if not (0 <= r0 < n and 0 <= c0 < n):
+        raise ValueError("Initial queen position out of bounds for board size n.")
+
+    # board representation (mutable list of lists)
+    board = [['.' for _ in range(n)] for _ in range(n)]
+    board[r0][c0] = 'Q'
+
+    # sets to track occupied columns and diagonals
+    cols = {c0}
+    diag1 = {r0 + c0}   # r + c
+    diag2 = {r0 - c0}   # r - c
+
+    # rows to process in order 0..n-1; when encountering r0 skip it
+    rows = list(range(n))
+
+    solution_found = False
+
+    def backtrack(row_index):
+        nonlocal solution_found
+        # if already found a solution, stop (we return first solution)
+        if solution_found:
+            return
+
+        # if we've placed queens for all rows, solution found
+        # check if any row remains unprocessed: we'll detect when row_index == n
+        if row_index == n:
+            # all rows processed -> solution
+            solution_found = True
+            return
+
+        r = rows[row_index]
+        # skip the row already containing the first queen
+        if r == r0:
+            backtrack(row_index + 1)
+            return
+
+        # try every column in this row
+        for c in range(n):
+            if c in cols or (r + c) in diag1 or (r - c) in diag2:
+                continue
+            # place queen
+            board[r][c] = 'Q'
+            cols.add(c); diag1.add(r + c); diag2.add(r - c)
+
+            backtrack(row_index + 1)
+            if solution_found:
+                return
+
+            # undo
+            board[r][c] = '.'
+            cols.remove(c); diag1.remove(r + c); diag2.remove(r - c)
+
+        # if loop finishes and no column worked, backtrack upwards
+        return
+
+    backtrack(0)
+
+    if solution_found:
+        return [''.join(row) for row in board]
+    else:
+        return None
+
+
+# Example usage:
+if __name__ == "__main__":
+    # Example: n=8, place first queen at row=1, col=4 (1-indexed)
+    n = 8
+    first_row = 1
+    first_col = 4
+
+    solution = solve_n_queens_with_first(n, first_row, first_col, one_indexed=True)
+    if solution:
+        print(f"One solution for n={n} with first queen at ({first_row},{first_col}):\n")
+        for line in solution:
+            print(line)
+    else:
+        print(f"No solution exists for n={n} with the first queen at ({first_row},{first_col}).")
